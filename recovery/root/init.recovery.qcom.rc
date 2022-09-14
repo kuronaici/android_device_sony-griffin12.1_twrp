@@ -1,15 +1,4 @@
-service hwservicemanager /sbin/hwservicemanager
-    user root
-    group root
-    disabled
-    onrestart setprop hwservicemanager.ready false
-    seclabel u:r:recovery:s0
 
-service servicemanager /sbin/servicemanager
-    user root
-    group root readproc
-    disabled
-    seclabel u:r:recovery:s0
 
 service logd /sbin/logd
     user root
@@ -26,8 +15,12 @@ on fs
     export LD_LIBRARY_PATH /system/lib64:/vendor/lib64:/vendor/lib64/hw
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
+    chmod 0660 /dev/qseecom
+    chown system drmrpc /dev/qseecom
+    install_keyring
 
 on init
+    start vendor.qseecomd
     setprop sys.usb.configfs 1
 
 on boot
@@ -35,5 +28,27 @@ on boot
     write /sys/devices/virtual/sec/tsp/after_work 1
     write /proc/touchpanel/gesture_enable 1
     
+on property:vendor.sys.listeners.registered=true
+    start keymaster-4-0
+    start gatekeeper-1-0
     
+    
+service vendor.qseecomd /vendor/bin/qseecomd
+    user root
+    group root
+    disabled
+    seclabel u:r:recovery:s0
+
+service keymaster-4-0 /vendor/bin/hw/android.hardware.keymaster@4.0-service-qti
+    user root
+    group root
+    disabled
+    seclabel u:r:recovery:s0
+
+service gatekeeper-1-0 /vendor/bin/hw/android.hardware.gatekeeper@1.0-service-qti
+    user root
+    group root
+    disabled
+    seclabel u:r:recovery:s0
+
     

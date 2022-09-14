@@ -60,9 +60,9 @@ PRODUCT_PACKAGES += \
 # # 
 
 
-# PRODUCT_PACKAGES_ENG += \
-#     qcom_decrypt \
-#     qcom_decrypt_fbe
+PRODUCT_PACKAGES_ENG += \
+    qcom_decrypt \
+    qcom_decrypt_fbe
 
 
 ##############
@@ -90,5 +90,5 @@ PRODUCT_PACKAGES += \
     
     
 # Soong namespaces
-# PRODUCT_SOONG_NAMESPACES += \
-#     $(LOCAL_PATH)
+PRODUCT_SOONG_NAMESPACES += \
+    $(LOCAL_PATH)
