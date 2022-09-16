@@ -52,3 +52,5 @@ service gatekeeper-1-0 /vendor/bin/hw/android.hardware.gatekeeper@1.0-service-qt
     seclabel u:r:recovery:s0
 
     
+
+import /init.recovery.qcom_decrypt.rc

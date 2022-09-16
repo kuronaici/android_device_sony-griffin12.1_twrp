@@ -66,8 +66,11 @@ PRODUCT_PACKAGES_ENG += \
 
 
 ##############
-# PRODUCT_PACKAGES += \
-#     bootctrl.msmnile
+PRODUCT_PACKAGES += \
+     bootctrl.msmnile \
+     libgptutils \
+     libz \
+     libcutils
 # # 
 # # # HIDL
 # PRODUCT_PACKAGES += \
@@ -80,14 +83,6 @@ PRODUCT_PACKAGES_ENG += \
 #     libgptutils \
 #     libz \
 #     libcutils
-
-
-    
-    # qcom decryption
-# PRODUCT_PACKAGES_ENG += \
-#     qcom_decrypt \
-#     qcom_decrypt_fbe
-    
     
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
